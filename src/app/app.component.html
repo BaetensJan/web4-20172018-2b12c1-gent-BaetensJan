@@ -1,14 +1,19 @@
-<div class="ui massive borderless menu">
-    <app-navbar></app-navbar>
-</div>
-<div class="ui main container">
-  <div class="ui segment">
-    <div class="ui left rail">
-      <div class="ui segment">
-        Train Disruptions
-      </div>
+<app-navbar  class="ui massive borderless menu"></app-navbar>
+<div class="ui centered  grid">
+  <div class="five wide column">
+    <div class="ui segment">
+      Train Disruptions
+      <app-disruption></app-disruption>
+      <app-disruption></app-disruption>
+      <app-disruption></app-disruption>
+      <app-disruption></app-disruption>
+      <app-disruption></app-disruption>
     </div>
-    <p>Search</p>
-    <p>Connections</p>
+  </div>
+  <div class="nine wide column">
+    <div class="ui segment">
+      <p>Search</p>
+      <p>Connections</p>
+    </div>
   </div>
 </div>
