@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DisruptionComponent } from './disruption/disruption.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { SearchComponent } from './search/search.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SearchComponent } from './search/search.component';
     NavbarComponent,
     DisruptionComponent,
     ConnectionComponent,
-    SearchComponent
+    SearchComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule
