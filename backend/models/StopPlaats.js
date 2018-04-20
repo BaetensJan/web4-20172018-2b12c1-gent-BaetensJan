@@ -1,9 +1,12 @@
-module.exports = function(sequelize, DataTypes) {
-  const Route = sequelize.model("route");
-  const StopPlaatsRoute = sequelize.model("stopPlaatsRoute");
-  const StopPlaats = sequelize.define('stopPlaats', {
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const StopPlaats = sequelize.define('StopPlaats', {
     uur: DataTypes.STRING,
   });
-  StopPlaats.belongsToMany(Route, {through: StopPlaatsRoute});
+
+  StopPlaats.associate = function (models) {
+    models.StopPlaats.belongsToMany(models.Route, {through: models.StopPlaatsRoute});
+  };
+
   return StopPlaats;
 };

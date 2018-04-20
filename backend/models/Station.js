@@ -1,10 +1,16 @@
-module.exports = function(sequelize, DataTypes) {
-
-  const StopPlaats = sequelize.model("stopPlaats");
-  const StopPlaatsStation = sequelize.model("stopPlaatsStation");
-  const Station = sequelize.define('station', {
-    naam: DataTypes.STRING
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const Station = sequelize.define('Station', {
+    naam: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    }
   });
-  Station.belongsToMany(StopPlaats, {through : StopPlaatsStation});
+
+  Station.associate = function (models) {
+    models.Station.belongsToMany(models.StopPlaats, {through: models.StopPlaatsStation});
+  };
+
   return Station;
 };

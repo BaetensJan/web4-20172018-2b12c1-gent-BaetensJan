@@ -3,6 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
+var db = require('./models');
+db.sequelize.sync();
+
+/*
 const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize('Rails', 'rails', 'Rails@2018', {
@@ -24,11 +29,14 @@ const StopPlaatsRoute = sequelize.import('stopPlaatsRoute', require('./models/St
 const StopPlaats = sequelize.import('stopPlaats', require('./models/StopPlaats'));
 const StopPlaatsStation = sequelize.import('stopPlaatsStation', require('./models/StopPlaatsStation'));
 const Station = sequelize.import('station', require('./models/Station'));
+const Onderbreking = sequelize.import('onderbreking', require('./models/Onderbreking'));
+
 Route.sync();
 StopPlaats.sync();
 StopPlaatsRoute.sync();
 Station.sync();
 StopPlaatsStation.sync();
+Onderbreking.sync();*/
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -57,7 +65,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send(err.message);
 });
 
 module.exports = app;

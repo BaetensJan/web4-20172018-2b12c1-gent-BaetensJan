@@ -1,9 +1,13 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
+let models = require('../models');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send('server works');
+router.get('/API/stations', function (req, res, next) {
+  models.Station.findAll()
+    .then(function (users) {
+      res.json(users);
+    });
 });
 
 module.exports = router;

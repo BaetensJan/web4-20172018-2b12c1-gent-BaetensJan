@@ -1,4 +1,5 @@
-module.exports = function(sequelize, DataTypes) {
-  const StopPlaatsStation = sequelize.define('stopPlaatsStation');
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const StopPlaatsStation = sequelize.define('StopPlaatsStation');
   return StopPlaatsStation;
 };

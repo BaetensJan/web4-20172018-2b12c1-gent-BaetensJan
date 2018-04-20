@@ -1,4 +1,5 @@
-module.exports = function(sequelize, DataTypes) {
-  const StopPlaatsRoute = sequelize.define('stopPlaatsRoute');
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const StopPlaatsRoute = sequelize.define('StopPlaatsRoute');
   return StopPlaatsRoute;
 };
