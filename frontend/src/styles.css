@@ -4,3 +4,7 @@
 html, body {
   background-color: #2892e0;
 }
+
+.loginGrid {
+  height: 80%;
+}

@@ -1,5 +1,5 @@
 <div class="ui container">
   <a class="header item">Rail Info</a>
-  <a class="active item">Connections</a>
-  <a class="ui right aligned active item">Login</a>
+  <a [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" routerLink="/" class="item">Connections</a>
+  <a routerLinkActive='active' routerLink="/login" class="ui right aligned item">Login</a>
 </div>

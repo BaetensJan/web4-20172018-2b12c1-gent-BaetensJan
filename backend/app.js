@@ -3,40 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+let passport = require('passport');
 
 var db = require('./models');
 db.sequelize.sync();
-
-/*
-const Sequelize = require('sequelize');
-
-const sequelize = new Sequelize('Rails', 'rails', 'Rails@2018', {
-  host: 'localhost',
-  dialect: 'mssql',
-
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  },
-  // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
-  operatorsAliases: false
-});
-
-const Route = sequelize.import('route', require('./models/Route'));
-const StopPlaatsRoute = sequelize.import('stopPlaatsRoute', require('./models/StopPlaatsRoute'));
-const StopPlaats = sequelize.import('stopPlaats', require('./models/StopPlaats'));
-const StopPlaatsStation = sequelize.import('stopPlaatsStation', require('./models/StopPlaatsStation'));
-const Station = sequelize.import('station', require('./models/Station'));
-const Onderbreking = sequelize.import('onderbreking', require('./models/Onderbreking'));
-
-Route.sync();
-StopPlaats.sync();
-StopPlaatsRoute.sync();
-Station.sync();
-StopPlaatsStation.sync();
-Onderbreking.sync();*/
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -48,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

@@ -1,0 +1,31 @@
+<div class="ui large form segment">
+  <form (ngSubmit)="onSubmit()" #searchForm="ngForm">
+    <div class="fields">
+      <div class="seven wide field">
+        <label>From:</label>
+        <select [(ngModel)]="model.fromStation" name="fromStation" id="fromStation" required>
+          <option *ngFor="let stat of stations" [ngValue]="stat">{{stat.naam}}</option>
+        </select>
+        TODO: remove this: {{model.fromStation.naam}}
+      </div>
+      <div class="two wide field">
+        <button id="switchButton" class="ui blue icon button">
+          <i class="exchange alternate white icon"></i>
+        </button>
+      </div>
+      <div class="seven wide field">
+        <label>To</label>
+        <select [(ngModel)]="model.toStation" name="toStation" id="toStation" required>
+          <option *ngFor="let stat of stations" [ngValue]="stat">{{stat.naam}}</option>
+        </select>
+        TODO: remove this: {{model.toStation.naam}}
+      </div>
+    </div>
+    <div class="fields">
+      <div class="seven wide field">
+        <input [(ngModel)]="model.dateString" type="datetime-local" id="dateTime" name="datetime" />
+      </div>
+    </div>
+    <button type="submit" class="ui gray right floated button">Search Connections</button>
+  </form>
+</div>
