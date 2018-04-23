@@ -1,17 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
 
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
-import { NavbarComponent } from './navbar/navbar.component';
-import { ConnectionComponent } from './homepage/connection/connection.component';
-import { LoginComponent } from './login/login.component';
-import {SearchModule} from "./homepage/search/search.module";
-import {DisruptionModule} from "./homepage/disruption/disruption.module";
+import {AppComponent} from './app.component';
+import {HttpClientModule} from '@angular/common/http';
+import {NavbarComponent} from './navbar/navbar.component';
+import {LoginComponent} from './user/login/login.component';
 import {RouterModule, Routes} from "@angular/router";
-import { HomepageComponent } from './homepage/homepage.component';
+import {HomepageComponent} from './homepage/homepage.component';
 import {HomepageModule} from "./homepage/homepage.module";
+import {httpInterceptorProviders} from "./http-interceptors";
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -34,7 +32,7 @@ const appRoutes: Routes = [
     HomepageModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
