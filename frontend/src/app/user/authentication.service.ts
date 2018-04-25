@@ -16,7 +16,7 @@ function parseJwt(token) {
 @Injectable()
 export class AuthenticationService {
   private readonly _tokenKey = 'currentUser';
-  private _user$: BehaviorSubject<string>;
+  private readonly _user$: BehaviorSubject<string>;
 
   public redirectUrl: string;
 

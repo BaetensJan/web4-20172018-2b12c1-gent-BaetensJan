@@ -1,6 +1,6 @@
 <div class="ui middle aligned center aligned grid loginGrid">
   <div class="column six wide">
-    <form action="https://s.codepen.io/voltron2112/debug/PqrEPM?" method="get" class="ui large form">
+    <form [formGroup]='user' (ngSubmit)='onSubmit()' class="ui large form">
       <div class="ui stacked secondary  segment">
         <h2 class="ui image header">
           <div class="content">
@@ -10,19 +10,19 @@
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input type="text" name="username" placeholder="Username">
+            <input type="text" formControlName="username" name="username" placeholder="Username">
           </div>
         </div>
         <div class="field">
           <div class="ui left icon input">
             <i class="lock icon"></i>
-            <input type="password" name="password" placeholder="Password">
+            <input type="password" formControlName="password" name="password" placeholder="Password">
           </div>
         </div>
-        <div class="ui fluid large teal submit button">Login</div>
+        <button [disabled]='!user.valid' class="ui fluid large teal submit button">Login</button>
       </div>
 
-      <div class="ui error message"></div>
+      <div class="ui error message" *ngIf='errorMsg'>{{errorMsg}}</div>
 
     </form>
   </div>

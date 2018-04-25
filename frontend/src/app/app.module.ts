@@ -5,14 +5,14 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {NavbarComponent} from './navbar/navbar.component';
-import {LoginComponent} from './user/login/login.component';
 import {RouterModule, Routes} from "@angular/router";
 import {HomepageComponent} from './homepage/homepage.component';
 import {HomepageModule} from "./homepage/homepage.module";
 import {httpInterceptorProviders} from "./http-interceptors";
+import {UserModule} from "./user/user.module";
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
+  {path: 'login', component: UserModule},
   { path: '', component: HomepageComponent}
 ];
 
@@ -20,8 +20,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    LoginComponent
+    NavbarComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -30,7 +29,8 @@ const appRoutes: Routes = [
     ),
     BrowserModule,
     HomepageModule,
-    HttpClientModule
+    HttpClientModule,
+    UserModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

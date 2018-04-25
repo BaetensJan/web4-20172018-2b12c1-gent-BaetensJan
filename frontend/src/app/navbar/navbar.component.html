@@ -1,5 +1,10 @@
 <div class="ui container">
   <a class="header item">Rail Info</a>
   <a [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" routerLink="/" class="item">Connections</a>
-  <a routerLinkActive='active' routerLink="/login" class="ui right aligned item">Login</a>
+  <a *ngIf='(currentUser | async)' class="item">Admin</a>
+  <a *ngIf='(currentUser | async) else logout' routerLinkActive='active' routerLink="/login"
+     class="ui right aligned item">Login</a>
+  <ng-template #logout>
+    <a routerLinkActive='active' routerLink="/logout" class="ui right aligned item">Login</a>
+  </ng-template>
 </div>

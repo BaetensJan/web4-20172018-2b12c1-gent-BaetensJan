@@ -2,14 +2,14 @@ let express = require('express');
 let router = express.Router();
 let models = require('../models');
 
-router.get('/API/stations', function (req, res, next) {
+router.get('/stations', function (req, res, next) {
   models.Station.findAll()
     .then(function (users) {
       res.json(users);
     });
 });
 
-router.post('/API/stations/', function (req, res, next) {
+router.post('/stations/', function (req, res, next) {
   models.Station.create({ naam: req.body.naam})
     .then(station => {
       res.json(station);
@@ -19,7 +19,7 @@ router.post('/API/stations/', function (req, res, next) {
     });
 });
 
-router.get('/API/onderbrekingen', function (req, res, next) {
+router.get('/onderbrekingen', function (req, res, next) {
   models.Onderbreking.findAll()
     .then(function (onderbreking) {
       res.json(onderbreking);
@@ -29,7 +29,7 @@ router.get('/API/onderbrekingen', function (req, res, next) {
     });
 });
 
-router.post('/API/onderbrekingen/', function (req, res, next) {
+router.post('/onderbrekingen/', function (req, res, next) {
   models.Onderbreking.create({ titel: req.body.titel, bericht: req.body.bericht, datumtijd: req.body.datumtijd})
     .then(onderbreking => {
       res.json(onderbreking);
@@ -39,14 +39,14 @@ router.post('/API/onderbrekingen/', function (req, res, next) {
     });
 });
 
-router.get('/API/stopplaatsen', function (req, res, next) {
+router.get('/stopplaatsen', function (req, res, next) {
   models.StopPlaats.findAll()
     .then(function (stopPlaats) {
       res.json(stopPlaats);
     });
 });
 
-router.get('/API/routes/:search', function (req, res, next) {
+router.get('/routes/:search', function (req, res, next) {
   console.log(JSON.parse(req.params.search));
   /*
   models.Route.findAll()

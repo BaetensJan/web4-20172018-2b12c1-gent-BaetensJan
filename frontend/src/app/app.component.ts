@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {map} from "rxjs/operators";
 import {Station} from "./station/Station.model";
 import {StationDataService} from "./station/station-data.service";
+import {AuthenticationService} from "./user/authentication.service";
 
 @Component({
   selector: 'app-root',
@@ -11,10 +11,16 @@ import {StationDataService} from "./station/station-data.service";
 })
 export class AppComponent {
 
-  constructor(private _stationDataService : StationDataService){}
+  constructor(private _stationDataService: StationDataService,
+              private authService: AuthenticationService) {
+  }
 
   get stations(): Observable<Station[]> {
     return this._stationDataService.stations;
+  }
+
+  get currentUser(): Observable<string> {
+    return this.authService.user$;
   }
 
   addNewStation(station) {
