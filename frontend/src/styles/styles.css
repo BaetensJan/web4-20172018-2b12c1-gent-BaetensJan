@@ -9,3 +9,7 @@ html, body {
 .loginGrid {
   height: 80%;
 }
+
+.secondary.vertical.menu {
+  width: 100%;
+}

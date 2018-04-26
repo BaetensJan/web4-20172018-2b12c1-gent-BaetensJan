@@ -1,3 +1,26 @@
-<p>
-  admin works!
-</p>
+<div class="ui centered  grid">
+  <div class="three wide column">
+    <div class="ui segment">
+      <div class="ui secondary vertical menu">
+        <h4>
+          Admin
+        </h4>
+        <a class="active item">
+          Stations
+        </a>
+        <a class="item">
+          Disruptions
+        </a>
+        <a class="item">
+          Route
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="twelve wide column">
+    <div class="ui segment">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</div>
