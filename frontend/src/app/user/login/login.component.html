@@ -6,6 +6,9 @@
           <div class="content">
             Log-in to your account
           </div>
+          <div *ngIf='errorMsg' class="ui negative message">
+            <small>{{errorMsg}}</small>
+          </div>
         </h2>
         <div class="field">
           <div class="ui left icon input">
@@ -21,9 +24,6 @@
         </div>
         <button [disabled]='!user.valid' class="ui fluid large teal submit button">Login</button>
       </div>
-
-      <div class="ui error message" *ngIf='errorMsg'>{{errorMsg}}</div>
-
     </form>
   </div>
 </div>

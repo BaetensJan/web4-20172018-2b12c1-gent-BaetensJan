@@ -19,9 +19,16 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles/styles.css",
+        "styles/jquery-ui.min.css",
+        "styles/jquery-ui-timepicker-addon.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "scripts/jquery-3.3.1.min.js",
+        "scripts/jquery-ui.min.js",
+        "scripts/jquery-ui-timepicker-addon.js",
+        "scripts/moment.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

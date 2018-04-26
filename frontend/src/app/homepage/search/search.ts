@@ -11,10 +11,14 @@ export class Search {
   {
     //Strip the timezone letter 'Z' from the string;
 
-    return this.dateTime.toISOString().replace( 'Z', '' );
+    return this.dateTime.toISOString().replace('Z', '').substring(0, 16);
   }
   set dateString(value:string)
   {
     this.dateTime = new Date(value);
+  }
+
+  onDateChange(date) {
+    this.dateTime = new Date(date);
   }
 }

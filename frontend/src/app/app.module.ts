@@ -10,9 +10,11 @@ import {HomepageComponent} from './homepage/homepage.component';
 import {HomepageModule} from "./homepage/homepage.module";
 import {httpInterceptorProviders} from "./http-interceptors";
 import {UserModule} from "./user/user.module";
+import {AdminModule} from "./admin/admin.module";
 
 const appRoutes: Routes = [
   {path: 'login', component: UserModule},
+  {path: 'admin', component: AdminModule},
   { path: '', component: HomepageComponent}
 ];
 
@@ -27,6 +29,7 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     ),
+    AdminModule,
     BrowserModule,
     HomepageModule,
     HttpClientModule,

@@ -6,9 +6,11 @@ import {AuthenticationService} from './authentication.service';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HttpModule} from '@angular/http';
+import {LogoutComponent} from './logout/logout.component';
 
 const routes = [
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'logout', component: LogoutComponent}
 ];
 
 @NgModule({
@@ -20,7 +22,8 @@ const routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   providers: [
     AuthenticationService,

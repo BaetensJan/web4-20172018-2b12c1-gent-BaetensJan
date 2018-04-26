@@ -56,11 +56,11 @@ export class LoginComponent implements OnInit {
           if (err.error instanceof Error) {
             this.errorMsg = `Error while trying to login user ${
               this.user.value.username
-              }: ${err.error.message}`;
+              }`;
           } else {
             this.errorMsg = `Error ${err.status} while trying to login user ${
               this.user.value.username
-              }: ${err.error}`;
+              }`;
           }
         }
       );
