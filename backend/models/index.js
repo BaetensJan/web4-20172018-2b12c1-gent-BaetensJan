@@ -5,8 +5,23 @@ var path = require('path');
 var Sequelize = require('sequelize');
 var basename = path.basename(__filename);
 var db = {};
+/*
+const sequelize = new Sequelize('rails', 'server_admin', 'Rails@2018', {
+  host: 'rails.database.windows.net',
+  dialect: 'mssql',
 
-const sequelize = new Sequelize('Rails', 'rails', 'Rails@2018', {
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
+  },
+  dialectOptions: {
+    encrypt: true
+  }
+});
+*/
+
+const sequelize = new Sequelize('rails', 'rails', 'Rails@2018', {
   host: 'localhost',
   dialect: 'mssql',
 

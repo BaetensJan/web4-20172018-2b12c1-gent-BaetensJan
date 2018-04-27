@@ -50,8 +50,8 @@ router.get('/routes/:search', function (req, res, next) {
   console.log(JSON.parse(req.params.search));
   /*
   models.Route.findAll()
-    .then(function (routes) {
-      res.json(routes);
+    .then(function (admin-routes) {
+      res.json(admin-routes);
     });*/
   res.send("Sent");
 });
