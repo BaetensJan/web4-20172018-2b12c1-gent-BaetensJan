@@ -4,11 +4,13 @@ import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {AdminStationsComponent} from "./admin-stations/admin-stations.component";
 import {AdminRoutesComponent} from "./admin-routes/admin-routes.component";
-import {AdminStationsModule} from "./admin-stations/admin-stations.module";
 import {AdminDisruptionsComponent} from "./admin-disruptions/admin-disruptions.component";
-import {AdminDisruptionsModule} from "./admin-disruptions/admin-disruptions.module";
-import {AdminRoutesModule} from "./admin-routes/admin-routes.module";
 import {AuthGuardService} from "../user/auth-guard.service";
+import {AdminNavModule} from "./admin-nav/admin-nav.module";
+import { DisruptionListComponent } from './admin-disruptions/disruption-list/disruption-list.component';
+import { AddDisruptionComponent } from './admin-disruptions/add-disruption/add-disruption.component';
+import { RoutesListComponent } from './admin-routes/routes-list/routes-list.component';
+import { AddRouteComponent } from './admin-routes/add-route/add-route.component';
 
 
 const routes = [
@@ -35,9 +37,7 @@ const routes = [
   imports: [
     CommonModule,
     FormsModule,
-    AdminStationsModule,
-    AdminDisruptionsModule,
-    AdminRoutesModule,
+    AdminNavModule,
     RouterModule.forChild(routes)
   ],
   declarations: [],

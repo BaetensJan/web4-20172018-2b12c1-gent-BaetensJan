@@ -5,19 +5,42 @@ import {AdminNavComponent} from "./admin-nav.component";
 import {AdminRoutesComponent} from "../admin-routes/admin-routes.component";
 import {RouterModule} from "@angular/router";
 import {AdminDisruptionsComponent} from "../admin-disruptions/admin-disruptions.component";
+import {StationListComponent} from "../admin-stations/station-list/station-list.component";
+import {AddStationComponent} from "../admin-stations/add-station/add-station.component";
+import {AddDisruptionComponent} from "../admin-disruptions/add-disruption/add-disruption.component";
+import {DisruptionListComponent} from "../admin-disruptions/disruption-list/disruption-list.component";
+import {RoutesListComponent} from "../admin-routes/routes-list/routes-list.component";
+import {AddRouteComponent} from "../admin-routes/add-route/add-route.component";
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule
   ],
-  declarations: [AdminStationsComponent,AdminDisruptionsComponent, AdminNavComponent, AdminRoutesComponent],
+  declarations: [
+    AdminStationsComponent,
+    AdminDisruptionsComponent,
+    AdminNavComponent,
+    AdminRoutesComponent,
+    AddStationComponent,
+    StationListComponent,
+    DisruptionListComponent,
+    AddDisruptionComponent,
+    RoutesListComponent,
+    AddRouteComponent
+  ],
   exports: [
     AdminStationsComponent,
     AdminNavComponent,
     AdminRoutesComponent,
     AdminDisruptionsComponent,
-    RouterModule
+    RouterModule,
+    AddStationComponent,
+    StationListComponent,
+    DisruptionListComponent,
+    AddDisruptionComponent,
+    RoutesListComponent,
+    AddRouteComponent
   ]
 })
 export class AdminNavModule { }
