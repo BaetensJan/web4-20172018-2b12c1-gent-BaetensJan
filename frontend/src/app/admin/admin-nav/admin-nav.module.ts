@@ -11,12 +11,18 @@ import {AddDisruptionComponent} from "../admin-disruptions/add-disruption/add-di
 import {DisruptionListComponent} from "../admin-disruptions/disruption-list/disruption-list.component";
 import {RoutesListComponent} from "../admin-routes/routes-list/routes-list.component";
 import {AddRouteComponent} from "../admin-routes/add-route/add-route.component";
+import {StationDataService} from "../../station/station-data.service";
+import {DisruptionDataService} from "../../disruption/disruption-data.service";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
+  providers: [StationDataService, DisruptionDataService],
   declarations: [
     AdminStationsComponent,
     AdminDisruptionsComponent,

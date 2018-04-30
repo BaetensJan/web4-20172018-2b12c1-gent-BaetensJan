@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DisruptionDataService} from "./disruption-data.service";
-import {Disruption} from "./disruption";
+import {DisruptionDataService} from "../../disruption/disruption-data.service";
+import {Disruption} from "../../disruption/disruption";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Search} from "../search/search";
 
@@ -11,20 +11,29 @@ import {Search} from "../search/search";
 })
 export class DisruptionComponent implements OnInit {
 
-  private disruptions : Disruption[];
+  private _disruptions : Disruption[];
   public errorMsg : string;
 
   constructor(private _disruptionDataService : DisruptionDataService) { }
 
   ngOnInit() {
+    this._disruptionDataService.events$.forEach(event => this.reloadDisruptions());
+    this.reloadDisruptions();
+  }
+
+  reloadDisruptions() {
     this._disruptionDataService.disruptions.subscribe(
       (disruptions) => {
-        this.disruptions = disruptions;
+        this._disruptions = disruptions;
       },
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${error.status} while trying to retrieve disruptions: ${error.error}`;
       }
     )
+  }
+
+  get disruptions() {
+    return this._disruptions;
   }
 
 }

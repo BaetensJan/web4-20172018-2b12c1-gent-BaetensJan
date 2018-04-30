@@ -1,3 +1,34 @@
-<p>
-  disruption-list works!
-</p>
+<div class="ui segment">
+  <h3>Disruption List</h3>
+  <div *ngIf="errorMsg" class="ui negative message">
+    <p>{{errorMsg}}</p>
+  </div>
+  <table class="ui celled table">
+    <thead>
+    <tr>
+      <th class="four wide">Date</th>
+      <th class="five wide">Title</th>
+      <th class="six wide">Message</th>
+      <th class="one wide"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let disruption of disruptions">
+      <td>
+        {{disruption.datumtijd}}
+      </td>
+      <td>
+        {{disruption.titel}}
+      </td>
+        <td>
+        {{disruption.bericht}}
+      </td>
+      <td class="center aligned">
+        <button class="center aligned mini ui red button" (click)="deleteDisruption(disruption)">
+          <i class="trash large white icon"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

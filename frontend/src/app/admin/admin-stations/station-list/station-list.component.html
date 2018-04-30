@@ -1,3 +1,26 @@
-<p>
-  station-list works!
-</p>
+<div class="ui segment">
+  <h3>Stations List</h3>
+  <div *ngIf="errorMsg" class="ui negative message">
+    <p>{{errorMsg}}</p>
+  </div>
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        <th class="fifteen wide">Station Name</th>
+        <th class="one wide"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let station of stations">
+      <td>
+        {{station.naam}}
+      </td>
+      <td class="center aligned">
+        <button class="center aligned mini ui red button" (click)="deleteStation(station)">
+          <i class="trash large white icon"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {DisruptionComponent} from "./disruption.component";
-import {DisruptionDataService} from "./disruption-data.service";
+import {DisruptionDataService} from "../../disruption/disruption-data.service";
 
 @NgModule({
   imports: [

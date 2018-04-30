@@ -6,7 +6,7 @@ import {HomepageComponent} from "./homepage.component";
 import {FormsModule} from "@angular/forms";
 import {DisruptionComponent} from "./disruption/disruption.component";
 import {SearchModule} from "./search/search.module";
-import {DisruptionDataService} from "./disruption/disruption-data.service";
+import {DisruptionDataService} from "../disruption/disruption-data.service";
 
 @NgModule({
   imports: [

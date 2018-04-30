@@ -23,8 +23,6 @@
       <div class="seven wide field">
         <input type="text" [minimumDate]="true" [onlyDatePicker]="false" id="dateTime" myDatepicker
                (dateChange)="model.onDateChange($event)">
-        {{model.dateTime}}
-        <!--<input [(ngModel)]="model.dateString" type="datetime-local" id="dateTime" name="datetime" /-->
       </div>
     </div>
     <button type="submit" class="ui gray right floated button">Search Connections</button>

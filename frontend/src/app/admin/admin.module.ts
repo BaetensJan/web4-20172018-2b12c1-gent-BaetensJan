@@ -36,7 +36,6 @@ const routes = [
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     AdminNavModule,
     RouterModule.forChild(routes)
   ],

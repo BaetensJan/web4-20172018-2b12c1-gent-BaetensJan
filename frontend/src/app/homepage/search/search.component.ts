@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit {
   public errorMsg: string;
 
   private _stations: Station[];
-  private model : Search = new Search(new Station("", new Date(), new Date()),new Station("", new Date(), new Date()), new Date());
+  private model : Search = new Search(new Station(""),new Station(""), new Date());
 
   constructor(
     private _searchDataService: SearchDataService,

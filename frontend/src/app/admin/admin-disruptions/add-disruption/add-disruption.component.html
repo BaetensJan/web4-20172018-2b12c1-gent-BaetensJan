@@ -1,3 +1,15 @@
-<p>
-  add-disruption works!
-</p>
+<div class="ui segment">
+  <h3>Add a station</h3>
+  <div *ngIf='errorMsg' class="ui negative message">{{errorMsg}}</div>
+  <form class="ui form" [formGroup]='model' (ngSubmit)='onSubmit()'>
+    <div class="seven wide field">
+      <label for="titel">Disruption Title</label>
+      <input type="text" id="titel" name="titel" formControlName="titel">
+    </div>
+    <div class="seven wide field">
+      <label for="bericht">Message</label>
+      <textarea type="text" id="bericht" name="bericht" formControlName="bericht"></textarea>
+    </div>
+    <button class="ui primary button">Add Disruption</button>
+  </form>
+</div>
