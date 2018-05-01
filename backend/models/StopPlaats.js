@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   StopPlaats.associate = function (models) {
-    models.StopPlaats.belongsToMany(models.Route, {through: models.StopPlaatsRoute});
+    models.StopPlaats.belongsToMany(models.Station, {through: models.StopPlaatsStation});
   };
 
   return StopPlaats;

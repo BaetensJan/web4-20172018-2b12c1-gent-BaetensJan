@@ -1,3 +1,21 @@
-<p>
-  add-route works!
-</p>
+<div class="ui segment">
+  <h3>Add a route</h3>
+  <div *ngIf='errorMsg' class="ui negative message">{{errorMsg}}</div>
+  <form class="ui form" [formGroup]='model' (ngSubmit)='onSubmit()'>
+    <div class="seven wide field">
+      <label for="name">Route name</label>
+      <input type="text" id="name" name="name" formControlName="name" placeholder="Route name">
+      <div class='ui pointing red basic label'>
+        a station with that name already exists
+      </div>
+    </div>
+    <div class="seven wide field">
+      <label for="name">Route date</label>
+      <input type="date" id="date" name="date" formControlName="date">
+      <div class='ui pointing red basic label'>
+        a station with that name already exists
+      </div>
+    </div>
+    <button class="ui primary button">Add Station</button>
+  </form>
+</div>

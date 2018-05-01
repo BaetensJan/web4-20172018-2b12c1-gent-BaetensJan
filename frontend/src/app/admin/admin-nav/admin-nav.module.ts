@@ -14,6 +14,7 @@ import {AddRouteComponent} from "../admin-routes/add-route/add-route.component";
 import {StationDataService} from "../../station/station-data.service";
 import {DisruptionDataService} from "../../disruption/disruption-data.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {RouteDataService} from "../../route/route-data.service";
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [StationDataService, DisruptionDataService],
+  providers: [StationDataService, DisruptionDataService, RouteDataService],
   declarations: [
     AdminStationsComponent,
     AdminDisruptionsComponent,

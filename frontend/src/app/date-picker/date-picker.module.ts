@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
-import {DatePickerDirective} from "../date-picker.directive";
+import {DatePickerDirective} from "./date-picker.directive";
 
 @NgModule({
   imports: [
@@ -15,5 +15,5 @@ import {DatePickerDirective} from "../date-picker.directive";
     DatePickerDirective
   ]
 })
-export class SharedModule {
+export class DatePickerModule {
 }

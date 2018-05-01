@@ -1,3 +1,10 @@
-<p>
-  routes-list works!
-</p>
+<div *ngFor="let route of routes">
+  <p>{{route.naam}}</p>
+  <p>{{route.datum}}</p>
+  <div *ngFor="let sp of route.stopPlaatsen">
+    <hr>
+    <p>{{sp.uur}}</p>
+    <p>{{sp.station.naam}}</p>
+  </div>
+</div>
+<p>{{errorMsg}}</p>

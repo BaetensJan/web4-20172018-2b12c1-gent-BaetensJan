@@ -83,10 +83,20 @@ router.get('/stopplaatsen', function (req, res, next) {
     });
 });
 
+router.get('/routes', function (req, res, next) {
+  models.Route.findAll({ include: [ {
+      model: models.StopPlaats,
+      include: [models.Station],
+    }]})
+    .then(function (routes) {
+      res.json(routes);
+    });
+});
+
 router.get('/routes/:search', function (req, res, next) {
   console.log(JSON.parse(req.params.search));
   /*
-  models.Route.findAll()
+  models.RouteModel.findAll()
     .then(function (admin-routes) {
       res.json(admin-routes);
     });*/

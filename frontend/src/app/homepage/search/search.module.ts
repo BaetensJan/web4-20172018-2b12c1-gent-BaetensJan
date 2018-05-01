@@ -4,14 +4,14 @@ import {SearchComponent} from "./search.component";
 import {FormsModule} from '@angular/forms';
 import {SearchDataService} from "./search-data.service";
 import {StationDataService} from "../../station/station-data.service";
-import {SharedModule} from "../../shared/shared.module";
+import {DatePickerModule} from "../../date-picker/date-picker.module";
 
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    SharedModule
+    DatePickerModule
   ],
   declarations: [SearchComponent],
   providers: [StationDataService, SearchDataService],
