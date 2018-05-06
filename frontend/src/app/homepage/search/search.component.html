@@ -1,26 +1,21 @@
 <div class="ui large form segment">
   <form (ngSubmit)="onSubmit()" #searchForm="ngForm">
-    <div class="fields">
-      <div class="seven wide field">
-        <label>From:</label>
+    <div class="two fields">
+      <div class="field">
+        <label>Station 1:</label>
         <select [(ngModel)]="model.fromStation" name="fromStation" id="fromStation" required>
           <option *ngFor="let stat of stations" [ngValue]="stat">{{stat.naam}}</option>
         </select>
       </div>
-      <div class="two wide field">
-        <button id="switchButton" class="ui blue icon button">
-          <i class="exchange alternate white icon"></i>
-        </button>
-      </div>
-      <div class="seven wide field">
-        <label>To</label>
+      <div class="field">
+        <label>Station 2:</label>
         <select [(ngModel)]="model.toStation" name="toStation" id="toStation" required>
           <option *ngFor="let stat of stations" [ngValue]="stat">{{stat.naam}}</option>
         </select>
       </div>
     </div>
-    <div class="fields">
-      <div class="seven wide field">
+    <div class="two fields">
+      <div class="field">
         <input type="text" [minimumDate]="true" [onlyDatePicker]="false" id="dateTime" myDatepicker
                (dateChange)="model.onDateChange($event)">
       </div>

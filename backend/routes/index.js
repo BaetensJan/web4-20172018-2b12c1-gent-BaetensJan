@@ -140,14 +140,85 @@ router.post('/routes', function (req,res, next) {
     });
 })
 
+Array.prototype.pushUnique = function (item){
+  if(this.indexOf(item) == -1) {
+    //if(jQuery.inArray(item, this) == -1) {
+    this.push(item);
+    return true;
+  }
+  return false;
+}
+
 router.get('/routes/:search', function (req, res, next) {
-  console.log(JSON.parse(req.params.search));
-  /*
-  models.RouteModel.findAll()
-    .then(function (admin-routes) {
-      res.json(admin-routes);
-    });*/
-  res.send("Sent");
+  var search = JSON.parse(req.params.search);
+  var stopPlaatsIds = [];
+  var routeIds = [];
+  models.Station.findAll(
+    {
+      where: {
+        naam: {
+          [models.sequelize.Op.or]: [
+              search.toStation.naam
+            ,
+              search.fromStation.naam
+          ]
+        }
+      },
+      include :[
+        {
+          model: models.StopPlaats,
+          attributes: ['id'],
+          include: []
+        }
+      ],
+      attributes: []
+    })
+    .then(stations => {
+      if (stations.length > 1) {
+        stations[0].StopPlaats.forEach(stat => stopPlaatsIds.pushUnique(stat.id));
+        stations[1].StopPlaats.forEach(stat => stopPlaatsIds.pushUnique(stat.id));
+      } else {
+        stations[0].StopPlaats.forEach(stat => stopPlaatsIds.pushUnique(stat.id));
+      }
+    })
+    .then(() => {
+      models.StopPlaatsRoute.findAll(
+        {
+          where: {
+            StopPlaatId: {
+              [models.sequelize.Op.or]: stopPlaatsIds
+            }
+          }
+        })
+        .then(spr => {
+          if (Array.isArray(spr)) {
+            spr.forEach(x => routeIds.pushUnique(x.RouteId));
+          } else if (spr.RouteId !== undefined){
+            routeIds.pushUnique(spr.RouteId);
+          }
+        })
+        .then(() => {
+          models.Route.findAll(
+            {
+              where: {
+                id: {
+                  [models.sequelize.Op.or]: routeIds
+                }
+              },
+              include: [ {
+                model: models.StopPlaats,
+                include: [models.Station]
+              }]
+            })
+            .then(r => {
+              res.json(r);
+            });
+        })
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+
 });
 
 module.exports = router;
