@@ -52,4 +52,12 @@ export class Route {
   get stopPlaatsen(): StopPlaats[] {
     return this._stopPlaatsen;
   }
+
+  addStopPlaats(sp: StopPlaats) {
+    this._stopPlaatsen.push(sp);
+  }
+
+  get dateString(): String {
+    return `${new Date(this._datum).toDateString()} ${new Date(this._datum).toTimeString()}`;
+  }
 }

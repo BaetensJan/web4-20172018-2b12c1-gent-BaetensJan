@@ -2,20 +2,37 @@
   <h3>Add a route</h3>
   <div *ngIf='errorMsg' class="ui negative message">{{errorMsg}}</div>
   <form class="ui form" [formGroup]='model' (ngSubmit)='onSubmit()'>
-    <div class="seven wide field">
-      <label for="name">Route name</label>
-      <input type="text" id="name" name="name" formControlName="name" placeholder="Route name">
-      <div class='ui pointing red basic label'>
-        a station with that name already exists
+    <div class="two fields">
+      <div class="field">
+        <label for="name">Route name</label>
+        <input type="text" id="name" name="name" formControlName="name" placeholder="Route name">
       </div>
     </div>
-    <div class="seven wide field">
-      <label for="name">Route date</label>
-      <input type="date" id="date" name="date" formControlName="date">
-      <div class='ui pointing red basic label'>
-        a station with that name already exists
+    <div class="two fields">
+      <div class="field">
+        <label for="date">Route date</label>
+        <input type="date" id="date" name="date" formControlName="date">
       </div>
     </div>
-    <button class="ui primary button">Add Station</button>
+    <div class="field">
+      <label for="station">Stop places</label>
+      <div formArrayName='stopPlaatsen' *ngFor='let item of stopPlaatsen.controls; let i = index'>
+        <div [formGroupName]='i'>
+          <div class='two fields'>
+            <div class="field">
+              <select class='ui fluid dropdown' id="station" formControlName='station'>
+                <option *ngFor='let station of stations' [ngValue]="station">
+                  {{station.naam}}
+                </option>
+              </select>
+            </div>
+            <div class="field">
+              <input type="time" id="uur" formControlName="uur">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type='submit' [disabled]='!model.valid' class="ui primary button">Add Route</button>
   </form>
 </div>

@@ -80,18 +80,65 @@ router.get('/stopplaatsen', function (req, res, next) {
   models.StopPlaats.findAll()
     .then(function (stopPlaats) {
       res.json(stopPlaats);
+    })
+    .catch(function (err) {
+      return next(err);
     });
 });
 
 router.get('/routes', function (req, res, next) {
   models.Route.findAll({ include: [ {
       model: models.StopPlaats,
-      include: [models.Station],
+      include: [models.Station]
     }]})
     .then(function (routes) {
       res.json(routes);
+    })
+    .catch(function (err) {
+      return next(err);
     });
 });
+
+router.post('/routes', function (req,res, next) {
+  var newRoute;
+  var stopPlaatsen;
+  models.Route.create(
+    { naam: req.body.naam,
+      datum: req.body.datum,
+      StopPlaats: req.body.stopPlaatsen
+    },
+    {
+      include: [
+        models.StopPlaats
+      ]
+    })
+    .then(route => {
+      newRoute = route;
+      models.StopPlaatsRoute.findAll({where: {
+          RouteId: route.dataValues.id
+        }})
+        .then(spr => {
+          stopPlaatsen = spr;
+          for (var i = 0; i < req.body.stopPlaatsen.length; i++) {
+            let sp = req.body.stopPlaatsen[i];
+            models.StopPlaatsStation.create({StationNaam: sp.station.naam, StopPlaatId: stopPlaatsen[i].dataValues.StopPlaatId});
+          }
+        })
+        .then(() => {
+          models.Route.find({where: {id: newRoute.id}, include: [ {
+              model: models.StopPlaats,
+              include: [models.Station]
+            }]})
+            .then(route => res.json(route))
+        })
+        .catch(function (err) {
+          return next(err);
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+})
 
 router.get('/routes/:search', function (req, res, next) {
   console.log(JSON.parse(req.params.search));

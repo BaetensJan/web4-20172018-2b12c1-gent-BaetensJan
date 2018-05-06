@@ -17,7 +17,7 @@ export class RoutesListComponent implements OnInit {
   constructor(private _routeDataService : RouteDataService) { }
 
   ngOnInit() {
-    //this._routeDataService.events$.forEach(event => this.reloadDisruptions());
+    this._routeDataService.events$.forEach(event => this.reloadDisruptions());
     this.reloadDisruptions();
   }
 

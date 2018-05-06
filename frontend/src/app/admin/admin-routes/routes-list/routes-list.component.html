@@ -1,10 +1,20 @@
-<div *ngFor="let route of routes">
-  <p>{{route.naam}}</p>
-  <p>{{route.datum}}</p>
-  <div *ngFor="let sp of route.stopPlaatsen">
-    <hr>
-    <p>{{sp.uur}}</p>
-    <p>{{sp.station.naam}}</p>
+<div class="ui grid" *ngFor="let route of routes">
+  <div class="row">
+    <div class="fourteen wide column">
+      <h4>{{route.naam}} - {{route.dateString}}</h4>
+    </div>
+    <div class="two wide column">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="fourteen wide column">
+      <div *ngFor="let sp of route.stopPlaatsen">
+        <p>{{sp.uur}}</p>
+        <p>{{sp.station.naam}}</p>
+        <hr>
+      </div>
+    </div>
   </div>
 </div>
 <p>{{errorMsg}}</p>
