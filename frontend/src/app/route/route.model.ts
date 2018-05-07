@@ -57,7 +57,11 @@ export class Route {
     this._stopPlaatsen.push(sp);
   }
 
-  get dateString(): String {
+  get dateTimeString(): String {
     return `${new Date(this._datum).toDateString()} ${new Date(this._datum).toTimeString()}`;
+  }
+
+  get dateString(): String {
+    return `${new Date(this._datum).toDateString()}`;
   }
 }

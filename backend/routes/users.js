@@ -7,6 +7,7 @@ let passport = require('passport');
 
 let auth = jwt({secret: process.env.BACKEND_SECRET});
 
+/*
 router.post('/register', function (req, res, next) {
   if (!req.body.username || !req.body.password) {
     return res.status(400).json(
@@ -21,6 +22,7 @@ router.post('/register', function (req, res, next) {
     return next(err);
   });
 });
+*/
 
 router.post('/login', function (req, res, next) {
   if (!req.body.username || !req.body.password) {

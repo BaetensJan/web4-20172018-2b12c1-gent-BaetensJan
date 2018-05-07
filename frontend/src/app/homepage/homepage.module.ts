@@ -7,6 +7,7 @@ import {FormsModule} from "@angular/forms";
 import {DisruptionComponent} from "./disruption/disruption.component";
 import {SearchModule} from "./search/search.module";
 import {DisruptionDataService} from "../disruption/disruption-data.service";
+import {ConnectionComponent} from "./connection/connection.component";
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import {DisruptionDataService} from "../disruption/disruption-data.service";
     FormsModule,
     SearchModule
   ],
-  declarations: [DisruptionComponent, HomepageComponent],
+  declarations: [DisruptionComponent, HomepageComponent, ConnectionComponent],
   providers: [StationDataService, SearchDataService, DisruptionDataService],
   exports: [
     HomepageComponent

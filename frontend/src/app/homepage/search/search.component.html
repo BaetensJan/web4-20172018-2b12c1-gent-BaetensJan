@@ -1,26 +1,31 @@
 <div class="ui large form segment">
-  <form (ngSubmit)="onSubmit()" #searchForm="ngForm">
+  <form class="ui form" [formGroup]='model' (ngSubmit)='onSubmit()'>
+    <h4>Search connections available after given date</h4>
     <div class="two fields">
       <div class="field">
         <label>Station 1:</label>
-        <select [(ngModel)]="model.fromStation" name="fromStation" id="fromStation" required>
+        <select formControlName="fromStation" name="fromStation" id="fromStation" required>
           <option *ngFor="let stat of stations" [ngValue]="stat">{{stat.naam}}</option>
         </select>
       </div>
       <div class="field">
         <label>Station 2:</label>
-        <select [(ngModel)]="model.toStation" name="toStation" id="toStation" required>
+        <select formControlName="toStation" name="toStation" id="toStation" required>
           <option *ngFor="let stat of stations" [ngValue]="stat">{{stat.naam}}</option>
         </select>
       </div>
     </div>
     <div class="two fields">
       <div class="field">
-        <input type="text" [minimumDate]="true" [onlyDatePicker]="false" id="dateTime" myDatepicker
-               (dateChange)="model.onDateChange($event)">
+        <label>Date:</label>
+        <input type="text" [minimumDate]="true" [onlyDatePicker]="true" myDatepicker
+               (dateChange)="onDateChange($event)">
+      </div>
+      <div class="field">
+        <input formControlName="date" type="hidden" id="dateTime">
       </div>
     </div>
-    <button type="submit" class="ui gray right floated button">Search Connections</button>
+    <button [disabled]='!model.valid' type="submit" class="ui blue right floated button">Search Connections</button>
   </form>
 </div>
 <script src=""></script>

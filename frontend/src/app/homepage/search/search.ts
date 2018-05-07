@@ -17,8 +17,4 @@ export class Search {
   {
     this.dateTime = new Date(value);
   }
-
-  onDateChange(date) {
-    this.dateTime = new Date(date);
-  }
 }

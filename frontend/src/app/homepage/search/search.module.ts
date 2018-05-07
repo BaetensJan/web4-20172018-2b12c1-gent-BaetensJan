@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SearchComponent} from "./search.component";
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SearchDataService} from "./search-data.service";
 import {StationDataService} from "../../station/station-data.service";
 import {DatePickerModule} from "../../date-picker/date-picker.module";
@@ -11,6 +11,7 @@ import {DatePickerModule} from "../../date-picker/date-picker.module";
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     DatePickerModule
   ],
   declarations: [SearchComponent],

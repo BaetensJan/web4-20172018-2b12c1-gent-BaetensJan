@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpErrorResponse} from "@angular/common/http";
-import {Disruption} from "../../../disruption/disruption";
 import {RouteDataService} from "../../../route/route-data.service";
 import {Route} from "../../../route/route.model";
+import {Disruption} from "../../../disruption/disruption";
 
 @Component({
   selector: 'app-routes-list',
@@ -30,6 +30,10 @@ export class RoutesListComponent implements OnInit {
         this.errorMsg = `Error ${error.status} while trying to retrieve routes: ${error.error}`;
       }
     )
+  }
+
+  deleteRoute(route : Route) {
+    this._routeDataService.removeRoute(route).subscribe();
   }
 
   get routes() {

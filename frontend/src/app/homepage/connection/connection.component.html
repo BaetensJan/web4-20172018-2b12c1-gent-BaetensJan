@@ -1,3 +1,21 @@
-<p>
-  connection works!
-</p>
+<div *ngIf="routes" class="ui grid ui segment">
+  <h4><strong>Found connections: </strong>{{routes.length}}</h4>
+</div>
+<div class="ui grid ui segment" *ngFor="let route of routes">
+  <div class="row">
+    <div class="fourteen wide column">
+      <h4>{{route.naam}} - {{route.dateString}}</h4>
+    </div>
+    <div class="two wide column">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="fourteen wide column ui middle aligned divided list">
+      <div class="item" *ngFor="let sp of route.stopPlaatsen">
+        <p>{{sp.uur}} - {{sp.station.naam}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<p>{{errorMsg}}</p>

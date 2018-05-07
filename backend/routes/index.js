@@ -1,6 +1,11 @@
 let express = require('express');
 let router = express.Router();
 let models = require('../models');
+let jwt = require('express-jwt');
+
+let auth = jwt({
+  secret: process.env.BACKEND_SECRET
+});
 
 router.post('/checkstationname/', function (req, res, next) {
   models.Station.findOne({where: {naam: req.body.name}})
@@ -26,7 +31,7 @@ router.get('/stations', function (req, res, next) {
     });
 });
 
-router.post('/stations/', function (req, res, next) {
+router.post('/stations/', auth, function (req, res, next) {
   models.Station.create({ naam: req.body.naam})
     .then(station => {
       res.json(station);
@@ -36,7 +41,7 @@ router.post('/stations/', function (req, res, next) {
     });
 });
 
-router.delete('/stations/:name', function (req, res, next) {
+router.delete('/stations/:name', auth, function (req, res, next) {
   models.Station.findOne({where: {naam: req.params.name}})
     .then(station => {
       res.json(station.destroy());
@@ -56,7 +61,7 @@ router.get('/onderbrekingen', function (req, res, next) {
     });
 });
 
-router.post('/onderbrekingen/', function (req, res, next) {
+router.post('/onderbrekingen/', auth, function (req, res, next) {
   models.Onderbreking.create({ titel: req.body.titel, bericht: req.body.bericht, datumtijd: req.body.datumtijd})
     .then(onderbreking => {
       res.json(onderbreking);
@@ -66,20 +71,10 @@ router.post('/onderbrekingen/', function (req, res, next) {
     });
 });
 
-router.delete('/onderbrekingen/:datumtijd', function (req, res, next) {
+router.delete('/onderbrekingen/:datumtijd', auth, function (req, res, next) {
   models.Onderbreking.findOne({where: {datumtijd: req.params.datumtijd}})
     .then(onderbreking => {
       res.json(onderbreking.destroy());
-    })
-    .catch(function (err) {
-      return next(err);
-    });
-});
-
-router.get('/stopplaatsen', function (req, res, next) {
-  models.StopPlaats.findAll()
-    .then(function (stopPlaats) {
-      res.json(stopPlaats);
     })
     .catch(function (err) {
       return next(err);
@@ -99,7 +94,7 @@ router.get('/routes', function (req, res, next) {
     });
 });
 
-router.post('/routes', function (req,res, next) {
+router.post('/routes', auth, function (req,res, next) {
   var newRoute;
   var stopPlaatsen;
   models.Route.create(
@@ -138,7 +133,32 @@ router.post('/routes', function (req,res, next) {
     .catch(function (err) {
       return next(err);
     });
-})
+});
+
+router.delete('/routes/:id', auth, function (req,res, next) {
+  var deletedRoute;
+  models.Route.find({
+    where: {
+      id: req.params.id
+    },
+    include: [
+      models.StopPlaats
+    ]})
+    .then(function (route) {
+      deletedRoute = route;
+      route.StopPlaats.forEach(sp => {
+        models.StopPlaats.find({
+          where: {
+            id: sp.id
+          }})
+          .then(sp => sp.destroy());
+      })
+      res.json(deletedRoute);
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+});
 
 Array.prototype.pushUnique = function (item){
   if(this.indexOf(item) == -1) {
@@ -149,10 +169,25 @@ Array.prototype.pushUnique = function (item){
   return false;
 }
 
+Array.prototype.diff = function(arr2) {
+  var ret = [];
+  this.sort();
+  arr2.sort();
+  for(var i = 0; i < this.length; i += 1) {
+    if(arr2.indexOf(this[i]) > -1){
+      ret.push(this[i]);
+    }
+  }
+  return ret;
+};
+
 router.get('/routes/:search', function (req, res, next) {
   var search = JSON.parse(req.params.search);
-  var stopPlaatsIds = [];
-  var routeIds = [];
+  var stopPlaatsIds1 = [];
+  var stopPlaatsIds2 = [];
+  var routeIds1 = [];
+  var routeIds2 = [];
+  console.log(search);
   models.Station.findAll(
     {
       where: {
@@ -175,50 +210,79 @@ router.get('/routes/:search', function (req, res, next) {
     })
     .then(stations => {
       if (stations.length > 1) {
-        stations[0].StopPlaats.forEach(stat => stopPlaatsIds.pushUnique(stat.id));
-        stations[1].StopPlaats.forEach(stat => stopPlaatsIds.pushUnique(stat.id));
+        stations[0].StopPlaats.forEach(stat => stopPlaatsIds1.pushUnique(stat.id));
+        stations[1].StopPlaats.forEach(stat => stopPlaatsIds2.pushUnique(stat.id));
       } else {
-        stations[0].StopPlaats.forEach(stat => stopPlaatsIds.pushUnique(stat.id));
+        stations[0].StopPlaats.forEach(stat => stopPlaatsIds1.pushUnique(stat.id));
+        stopPlaatsIds2 = stopPlaatsIds1;
       }
     })
     .then(() => {
-      models.StopPlaatsRoute.findAll(
-        {
-          where: {
-            StopPlaatId: {
-              [models.sequelize.Op.or]: stopPlaatsIds
+      var p1 = new Promise((resolve, reject) => {
+        models.StopPlaatsRoute.findAll(
+          {
+            where: {
+              StopPlaatId: {
+                [models.sequelize.Op.or]: stopPlaatsIds1
+              }
             }
-          }
-        })
-        .then(spr => {
-          if (Array.isArray(spr)) {
-            spr.forEach(x => routeIds.pushUnique(x.RouteId));
-          } else if (spr.RouteId !== undefined){
-            routeIds.pushUnique(spr.RouteId);
-          }
-        })
-        .then(() => {
-          models.Route.findAll(
-            {
-              where: {
-                id: {
-                  [models.sequelize.Op.or]: routeIds
-                }
+          })
+          .then(spr => {
+            if (Array.isArray(spr)) {
+              spr.forEach(x => routeIds1.pushUnique(x.RouteId));
+            } else if (spr.RouteId !== undefined) {
+              routeIds1.pushUnique(spr.RouteId);
+            }
+            return resolve();
+          })
+      });
+      var p2 = new Promise((resolve, reject)  => {
+        models.StopPlaatsRoute.findAll(
+          {
+            where: {
+              StopPlaatId: {
+                [models.sequelize.Op.or]: stopPlaatsIds2
+              }
+            }
+          })
+          .then(spr => {
+            if (Array.isArray(spr)) {
+              spr.forEach(x => routeIds2.pushUnique(x.RouteId));
+            } else if (spr.RouteId !== undefined) {
+              routeIds2.pushUnique(spr.RouteId);
+            }
+            return resolve();
+          })
+      });
+      Promise.all([p1, p2]).then(function(values) {
+        var routeIds = routeIds1.diff(routeIds2);
+        models.Route.findAll(
+          {
+            where: {
+              id: {
+                [models.sequelize.Op.or]: routeIds
               },
-              include: [ {
-                model: models.StopPlaats,
-                include: [models.Station]
-              }]
-            })
-            .then(r => {
-              res.json(r);
-            });
-        })
+              datum: {
+                [models.sequelize.Op.gte]: search.dateTime
+              }
+            },
+            include: [ {
+              model: models.StopPlaats,
+              include: [models.Station]
+            }],
+            order: [
+              ['datum', 'ASC'],
+              ['naam', 'ASC'],
+            ],
+          })
+          .then(r => {
+            res.json(r);
+          });
+      });
     })
     .catch(function (err) {
       return next(err);
     });
-
 });
 
 module.exports = router;

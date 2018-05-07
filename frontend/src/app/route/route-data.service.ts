@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
 import {Route} from "./route.model";
+import {Station} from "../station/Station.model";
 
 @Injectable()
 export class RouteDataService {
@@ -21,7 +22,13 @@ export class RouteDataService {
   addNewRoute(route: Route): Observable<Route> {
     return this.http
       .post(`${this._appUrl}/routes/`, route)
-      .pipe(tap(val =>this.newEvent("new value")),map(Route.fromJSON));
+      .pipe(tap(() =>this.newEvent("new value")), map(Route.fromJSON));
+  }
+
+  removeRoute(route: Route) : Observable<Route>{
+    return this.http
+      .delete(`${this._appUrl}/routes/${route.id}`)
+      .pipe(tap(() =>this.newEvent("new value")),map(Route.fromJSON));
   }
 
   newEvent(event) {
@@ -31,4 +38,5 @@ export class RouteDataService {
   get events$ () {
     return this._subject.asObservable();
   }
+
 }
