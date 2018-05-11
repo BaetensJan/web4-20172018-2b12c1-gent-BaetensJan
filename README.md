@@ -1,11 +1,11 @@
 
-#Details student:
+# Details student:
 
 Naam: Baetens
 Voornaam: Jan
 Klas: 2C1
 
-#Gegevens website
+# Gegevens website
 
 URL: https://rails-web-app-2018.herokuapp.com
 
